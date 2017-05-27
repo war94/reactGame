@@ -32,15 +32,15 @@ class App extends Component {
   setNextStage(){
     var nextStage = this.state.stage_number + 1;
     
-    var arrayvar = this.state.board;
+    var boardArray = this.state.board;
 
     for(let l = 0; l < this.state.board.length; l++){
       for(let c = 0; c < this.state.board[0].length; c++){
-        arrayvar[l][c] = Constants['board_stage' + nextStage][l][c];
+        boardArray[l][c] = Constants['board_stage' + nextStage][l][c];
       }
     }
 
-    this.setState({stage_number: nextStage, board: arrayvar});
+    this.setState({stage_number: nextStage, board: boardArray});
 
     var flw = [];
 
@@ -130,15 +130,15 @@ class App extends Component {
       return;
     }
 
-    var arrayvar = this.state.board.slice();
+    var boardArray = this.state.board.slice();
 
     if(nextBoardPosition === Constants.square_rock){
       if(nextMove.direction === Constants.dir_right){
-        if(arrayvar[nextMove.line][nextMove.column + 1] === Constants.square_empty){
-          arrayvar[nextMove.line][nextMove.column + 1] = Constants.square_rock;
-          arrayvar[nextMove.line][nextMove.column] = Constants.square_empty;
+        if(boardArray[nextMove.line][nextMove.column + 1] === Constants.square_empty){
+          boardArray[nextMove.line][nextMove.column + 1] = Constants.square_rock;
+          boardArray[nextMove.line][nextMove.column] = Constants.square_empty;
 
-          this.setState({ board: arrayvar });
+          this.setState({ board: boardArray });
 
           let position = {line: nextMove.line + 1, column: nextMove.column + 1};
 
@@ -147,11 +147,11 @@ class App extends Component {
           return;
         }
       }else if(nextMove.direction === Constants.dir_left){
-        if(arrayvar[nextMove.line][nextMove.column - 1] === Constants.square_empty){
-          arrayvar[nextMove.line][nextMove.column - 1] = Constants.square_rock;
-          arrayvar[nextMove.line][nextMove.column] = Constants.square_empty;
+        if(boardArray[nextMove.line][nextMove.column - 1] === Constants.square_empty){
+          boardArray[nextMove.line][nextMove.column - 1] = Constants.square_rock;
+          boardArray[nextMove.line][nextMove.column] = Constants.square_empty;
 
-          this.setState({ board: arrayvar });
+          this.setState({ board: boardArray });
 
           let position = {line: nextMove.line + 1, column: nextMove.column - 1};
 
@@ -167,10 +167,10 @@ class App extends Component {
 
     let perviousPosition = {line: this.state.playerPosition[0], column: this.state.playerPosition[1]};
 
-    arrayvar[currentLine][currentColumn] = Constants.square_empty;
-    arrayvar[nextMove.line][nextMove.column] = Constants.square_player;
+    boardArray[currentLine][currentColumn] = Constants.square_empty;
+    boardArray[nextMove.line][nextMove.column] = Constants.square_player;
 
-    this.setState({ board: arrayvar });
+    this.setState({ board: boardArray });
 
     this.setState({playerPosition: [nextMove.line, nextMove.column]});
 
@@ -201,16 +201,16 @@ class App extends Component {
   makeFall(direction, position){
     if(direction === Constants.dir_up || position.line === 0) return;
 
-    var arrayvar = this.state.board.slice();
+    var boardArray = this.state.board.slice();
 
-    if(position.line < arrayvar.length 
-      && arrayvar[position.line - 1][position.column] === Constants.square_rock
-      && arrayvar[position.line][position.column] === Constants.square_empty){
+    if(position.line < boardArray.length 
+      && boardArray[position.line - 1][position.column] === Constants.square_rock
+      && boardArray[position.line][position.column] === Constants.square_empty){
 
-      arrayvar[position.line - 1][position.column] = Constants.square_empty;
-      arrayvar[position.line][position.column] = Constants.square_rock;
+      boardArray[position.line - 1][position.column] = Constants.square_empty;
+      boardArray[position.line][position.column] = Constants.square_rock;
 
-      this.setState({board: arrayvar});
+      this.setState({board: boardArray});
 
       this.playerKilled(position);
 
@@ -247,11 +247,11 @@ class App extends Component {
       && this.state.board[position.line + 1][position.column] === Constants.square_rock
       && this.state.board[position.line + 1][position.column + dif] === Constants.square_empty){
       
-      var arrayvar = this.state.board.slice();
-      arrayvar[position.line][position.column] = Constants.square_empty;
-      arrayvar[position.line + 1][position.column + dif] = Constants.square_rock;
+      var boardArray = this.state.board.slice();
+      boardArray[position.line][position.column] = Constants.square_empty;
+      boardArray[position.line + 1][position.column + dif] = Constants.square_rock;
       
-      this.setState({board: arrayvar});
+      this.setState({board: boardArray});
 
       this.playerKilled({line: position.line + 1, column: position.column + dif});
 
