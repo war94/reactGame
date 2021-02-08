@@ -30,7 +30,7 @@
 }
 
 .square {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   float: left;
   font-size: 24px;
   font-weight: bold;
@@ -44,19 +44,24 @@
 }
 
 .squareGrass{
-  background: green;
+  background-image: url("images/grass.png");
+  background-size: contain;
 }
 
 .squareRock{
-  background: dimgray;
+  background-color: dimgray;
+  background-image: url("images/rock.png"), url("images/grass.png");
+  background-size: 100% 100%;
 }
 
 .squareWall{
-  background: darkred;
+  background-image: url("images/bricks.jpg");
+  background-size: contain;
 }
 
 .squareFlower{
-  background: blue;
+  background-image: url("images/apple.png"), url("images/grass.png");
+  background-size: contain;
 }
 
 .squareEmpty{
@@ -64,5 +69,7 @@
 }
 
 .squarePlayer{
-  background: purple;
+  background: black;
+  background-image: url("images/face.png");
+  background-size: contain;
 }
